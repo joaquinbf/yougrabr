@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--  ICON -->
+    <link rel="shortcut icon" href="{{url_for('static', filename='iconhead.png')}}" type="image/x-icon">
+
+
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700&display=swap" rel="stylesheet">
+
+    <!-- CSS BOOTSTRAP -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- CSS CUSTOM -->
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+
+    <title>GrabrPyTravel</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar container">
+            <ul>
+                <li>
+                    <img src="{{url_for('static', filename='iconhead.png')}}" alt="icono" width="32rem">
+                </li>
+                <li class="li-title">
+                    <a class="title-nav" href="/">
+                        GrabrPyTravel
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="container filter-container form-vuelo-alojamiento">
+        <form class="form-filter container-fluid" action="/buscar/" method="GET">
+            <div class="row row-form">
+                <div class="col col-form">
+                    <label for="origen-input">Origen</label>
+                    <br>
+                    <select class="input-lugar form-control" name="origen-input" id="origen-input">
+                        {% for o in origenes %}
+                        <option value="{{o}}">{{o}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col col-form">
+                    <label for="destino-input">Destino</label>
+                    <br>
+                    <select class="input-lugar form-control" name="destino-input" id="destino-input">
+                        {% for d in destinos %}
+                        <option value="{{d}}">{{d}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row row-form">
+                <div class="col col-form">
+                    <label for="fecha-ida">Fecha de ida</label>
+                    <br>
+                    <input type="date" class="form-control" name="fecha-ida" id="fecha-ida">
+                </div>
+                <div class="col col-form">
+                    <label for="fecha-vuelta">Fecha de vuelta</label>
+                    <br>
+                    <input type="date" class="form-control" name="fecha-vuelta" id="fecha-vuelta">
+                </div>
+            </div>
+            <div class="row row-form">
+                <div class="col col-form">
+                    <input type="checkbox" name="check-sin-fecha" id="check-sin-fecha">
+                    <label for="check-sin-fecha">todavia no he decidido la fecha</label>
+                </div>
+            </div>
+
+            <div class="row row-form">
+                <div class="col col-form">
+                    <label for="cant-habitaciones">Habitaciones</label>
+                    <input type="number" class="form-control" value="0" name="cant-habitaciones" id="cant-habitaciones">
+                </div>
+                <div class="col col-form">
+                    <label for="cant-adultos">Adultos</label>
+                    <input type="number" class="form-control" value="0" name="cant-adultos" id="cant-adultos">
+                </div>
+                <div class="col col-form">
+                    <label for="cant-menores">Menores</label>
+                    <input type="number" class="form-control" value="0" name="cant-menores" id="cant-menores">
+                </div>
+            </div>
+            <div class="row row-form">
+                <div class="col col-form">
+                    <input class="btn btn-submit" type="submit" value="Buscar Paquetes">
+                </div>
+            </div>
+        </form>
+    </section>
+    <section class="container section-paquetes" id="section-paquetes">
+        <div class="container">
+            <div class="row row-form">
+                <div class="col col-form">
+                    <ul class="list-paquetes">
+                        {% for p in paquetes %}
+                        <li class="li-paquete">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-4 div-card-image">
+                                        <img src="{{p.imagen}}" class="card-img" alt="...">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{p.nombre}}</h5>
+                                            <p class="card-text">{{p.descripcion}}</p>
+                                            <p class="card-text"><small class="text-muted">{{p.calificacion}}
+                                                    estrellas</small></p>
+                                            <h5 class="card-title">{{p.precio}}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <footer class="container">
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
