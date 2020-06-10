@@ -56,4 +56,4 @@ def buscar_paquetes():
 
 # Se inicia el servidor en el puerto 4000 del localhost
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True, port=4000)
+    app.run(host="localhost", debug=True, port=4000)
